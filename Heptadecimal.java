@@ -44,19 +44,12 @@ public class Heptadecimal {
             throw new IllegalArgumentException("Negative numbers are not supported.");
     }
 
-    private static String heptResRecurs(int d, int exp) {
-        if (exp == 0)
-            return "" + d;
-        return "" + heptadecimalResolve(d / (int) Math.pow(17, exp)) + heptResRecurs(d % (int) Math.pow(17, exp), exp - 1);
-    }
-
     public static String toHeptadecimal(int decimal) {
-        int heptExp = 0;
         if (decimal < 0)
             throw new IllegalArgumentException("Negative numbers are not supported.");
-        for (int i = 1; decimal / Math.pow(17, i) > 1; i++)
-            heptExp += 1;
-        return "" + heptResRecurs(decimal, heptExp);
+        if (decimal < 17)
+            return "" + heptadecimalResolve(decimal);
+        return "" + toHeptadecimal(decimal / 17) + heptadecimalResolve(decimal % 17);
     }
 
     public int decimal() {
@@ -71,13 +64,13 @@ public class Heptadecimal {
 
 // testing
 
-// void main() {
+void main() {
 //     Heptadecimal x = new Heptadecimal(Heptadecimal.toHeptadecimal(567));
 //     IO.println(x.decimal());
 
 //     IO.println(Heptadecimal.heptadecimalResolve(7));
 
-//     IO.println(Heptadecimal.toHeptadecimal(567));
+    IO.println(Heptadecimal.toHeptadecimal(345));
 
 //     IO.println(new Heptadecimal("1g").decimal());
-// }
+}
