@@ -60,17 +60,46 @@ public class Heptadecimal {
         return dec;
     }
 
+    public void add(Heptadecimal other) {
+        this.value = toHeptadecimal(this.decimal() + other.decimal());
+    }
+
+    public void add(int other) {
+        this.value = toHeptadecimal(this.decimal() + other);
+    }
+
+    public void add(String other) {
+        this.value = toHeptadecimal(this.decimal() + new Heptadecimal(other).decimal());
+    }
+
+    public void multiply(Heptadecimal other) {
+        this.value = toHeptadecimal(this.decimal() * other.decimal());
+    }
+
+    public void multiply(double other) {
+        this.value = toHeptadecimal((int) (this.decimal() * other));
+    }
+
+    public void multiply(String other) {
+        this.value = toHeptadecimal(this.decimal() * new Heptadecimal(other).decimal());
+    }
 }
 
 // testing
 
 void main() {
-//     Heptadecimal x = new Heptadecimal(Heptadecimal.toHeptadecimal(567));
-//     IO.println(x.decimal());
+    // Heptadecimal x = new Heptadecimal(Heptadecimal.toHeptadecimal(20));
+    // IO.println(x.decimal());
+    // x.multiply(new Heptadecimal(Heptadecimal.toHeptadecimal(2)));
+    // IO.println(x.decimal());
+    // x.multiply(0.5);
+    // IO.println(x.decimal());
+    // x.add("10");
+    // IO.println(x.decimal());
 
-//     IO.println(Heptadecimal.heptadecimalResolve(7));
+    // IO.println(Heptadecimal.heptadecimalResolve(7));
 
-    IO.println(Heptadecimal.toHeptadecimal(345));
+    // IO.println(Heptadecimal.toHeptadecimal(345));
 
-//     IO.println(new Heptadecimal("1g").decimal());
+    // IO.println(new Heptadecimal("1g").decimal());
 }
