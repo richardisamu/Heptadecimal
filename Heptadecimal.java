@@ -3,6 +3,7 @@ import java.util.Arrays;
 
 public class Heptadecimal {
     String value;
+    int decimal;
 
     private static boolean verifyHept(String heptadecimal) {
         ArrayList<Character> digitPool = new ArrayList<Character>(
@@ -20,12 +21,13 @@ public class Heptadecimal {
             throw new IllegalArgumentException("Invalid heptadecimal number.");
         }
         this.value = n;
+        this.decimal = this.toDecimal();
     }
 
     public static int decimalResolve(char d) {
         if (!verifyHept("" + d))
             throw new IllegalArgumentException("Invalid heptadecimal digit.");
-        else if (d < 57)
+        else if (d < 58)
             return d - 48;
         else if (d <= 90)
             return d - 55;
@@ -52,7 +54,7 @@ public class Heptadecimal {
         return "" + toHeptadecimal(decimal / 17) + heptadecimalResolve(decimal % 17);
     }
 
-    public int decimal() {
+    public int toDecimal() {
         int dec = 0;
         for (int i = 0; i < this.value.length(); i++) {
             dec += Math.pow(17, this.value.length() - (i + 1)) * decimalResolve(this.value.charAt(i));
@@ -61,49 +63,30 @@ public class Heptadecimal {
     }
 
     public void add(Heptadecimal other) {
-        this.value = toHeptadecimal(this.decimal() + other.decimal());
+        this.value = toHeptadecimal(this.toDecimal() + other.toDecimal());
     }
     public void add(int other) {
-        this.value = toHeptadecimal(this.decimal() + other);
+        this.value = toHeptadecimal(this.toDecimal() + other);
     }
     public void add(String other) {
-        this.value = toHeptadecimal(this.decimal() + new Heptadecimal(other).decimal());
+        this.value = toHeptadecimal(this.toDecimal() + new Heptadecimal(other).toDecimal());
     }
 
     public void multiply(Heptadecimal other) {
-        this.value = toHeptadecimal(this.decimal() * other.decimal());
+        this.value = toHeptadecimal(this.toDecimal() * other.toDecimal());
     }
     public void multiply(double other) {
-        this.value = toHeptadecimal((int) (this.decimal() * other));
+        this.value = toHeptadecimal((int) (this.toDecimal() * other));
     }
     public void multiply(String other) {
-        this.value = toHeptadecimal(this.decimal() * new Heptadecimal(other).decimal());
+        this.value = toHeptadecimal(this.toDecimal() * new Heptadecimal(other).toDecimal());
     }
 
-    public Heptadecimal add(Heptadecimal a, Heptadecimal b) {
-        return new Heptadecimal(toHeptadecimal(a.decimal() + b.decimal()));
+    public static Heptadecimal add(Heptadecimal a, Heptadecimal b) {
+        return new Heptadecimal(toHeptadecimal(a.toDecimal() + b.toDecimal()));
     }
 
-    public Heptadecimal multiply(Heptadecimal a, Heptadecimal b) {
-        return new Heptadecimal(toHeptadecimal(a.decimal() * b.decimal()));
+    public static Heptadecimal multiply(Heptadecimal a, Heptadecimal b) {
+        return new Heptadecimal(toHeptadecimal(a.toDecimal() * b.toDecimal()));
     }
-}
-
-// testing
-
-void main() {
-    // Heptadecimal x = new Heptadecimal(Heptadecimal.toHeptadecimal(20));
-    // IO.println(x.decimal());
-    // x.multiply(new Heptadecimal(Heptadecimal.toHeptadecimal(2)));
-    // IO.println(x.decimal());
-    // x.multiply(0.5);
-    // IO.println(x.decimal());
-    // x.add("10");
-    // IO.println(x.decimal());
-
-    // IO.println(Heptadecimal.heptadecimalResolve(7));
-
-    // IO.println(Heptadecimal.toHeptadecimal(345));
-
-    // IO.println(new Heptadecimal("1g").decimal());
 }
