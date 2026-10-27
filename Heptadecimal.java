@@ -5,8 +5,8 @@ public class Heptadecimal {
     String value;
 
     private static boolean verifyHept(String heptadecimal) {
-        ArrayList<Character> digitPool = new ArrayList<Character>(Arrays.asList('0', '1', '2', '3', '4', '5', '6', '7', '8',
-                '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'a', 'b', 'c', 'd', 'e', 'f', 'g'));
+        ArrayList<Character> digitPool = new ArrayList<Character>(
+                Arrays.asList('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'a', 'b', 'c', 'd', 'e', 'f', 'g'));
         for (int i = 0; i < heptadecimal.length(); i++) {
             if (!digitPool.contains(heptadecimal.charAt(i))) {
                 return false;
@@ -14,7 +14,7 @@ public class Heptadecimal {
         }
         return true;
     }
-    
+
     public Heptadecimal(String n) {
         if (!verifyHept(n)) {
             throw new IllegalArgumentException("Invalid heptadecimal number.");
@@ -63,11 +63,9 @@ public class Heptadecimal {
     public void add(Heptadecimal other) {
         this.value = toHeptadecimal(this.decimal() + other.decimal());
     }
-
     public void add(int other) {
         this.value = toHeptadecimal(this.decimal() + other);
     }
-
     public void add(String other) {
         this.value = toHeptadecimal(this.decimal() + new Heptadecimal(other).decimal());
     }
@@ -75,13 +73,19 @@ public class Heptadecimal {
     public void multiply(Heptadecimal other) {
         this.value = toHeptadecimal(this.decimal() * other.decimal());
     }
-
     public void multiply(double other) {
         this.value = toHeptadecimal((int) (this.decimal() * other));
     }
-
     public void multiply(String other) {
         this.value = toHeptadecimal(this.decimal() * new Heptadecimal(other).decimal());
+    }
+
+    public Heptadecimal add(Heptadecimal a, Heptadecimal b) {
+        return new Heptadecimal(toHeptadecimal(a.decimal() + b.decimal()));
+    }
+
+    public Heptadecimal multiply(Heptadecimal a, Heptadecimal b) {
+        return new Heptadecimal(toHeptadecimal(a.decimal() * b.decimal()));
     }
 }
 
