@@ -21,6 +21,7 @@ public class Testing {
 
         Heptadecimal y = new Heptadecimal(Heptadecimal.toHeptadecimal(13));
         IO.println(Heptadecimal.add(x, y).decimal);
-    }
 
+        IO.println(Heptadecimal.toDecimal("34"));
+    }
 }
